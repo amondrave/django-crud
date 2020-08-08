@@ -1,0 +1,20 @@
+{% extends 'index.html' %}
+
+{% block titulo %} {{titulo}} {% endblock %}
+
+{% block contenido %}
+
+<p>Editar producto</p>
+<form action="" method="post">
+    {% csrf_token %}
+    {% if error %}
+    <h3>{{error}}</h3>
+    {% else %}
+    {{ producto_form.as_p }}
+    <input type="submit" value="crear" />
+    {% endif %}
+</form>
+
+<a href="../../inicio">Volver al inicio</a>
+
+{% endblock %}

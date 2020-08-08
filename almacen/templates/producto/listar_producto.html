@@ -1,0 +1,38 @@
+<!-- @format -->
+
+{% extends 'index.html' %}
+
+{% block titulo%} {{titulo}} {% endblock %}
+
+{% block contenido %}
+
+<p>Productos en base</p>
+{% if productos %}
+<table class="table">
+	<thead>
+		<tr>
+			<th scope="col">Codigo</th>
+			<th scope="col">Nombre</th>
+			<th scope="col">Tipo</th>
+			<th scope="col">Acción</th>
+			<th scope="col">Acción</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for producto in productos %}
+		<tr>
+			<td>{{ producto.codigo }}</td>
+			<td>{{ producto.nombre }}</td>
+			<td>{{ producto.tipo.nombre }}</td>
+			<td> <a href="{% url 'producto:editar_producto' producto.codigo %}" class="btn btn-primary">Editar</a> </td>
+			<td> <a href="{% url 'producto:eliminar_producto' producto.codigo %}" class="btn btn-danger">Eliminar</a>
+			</td>
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>
+{% else %}
+<p>Lo siento no hay datos</p>
+{% endif %}
+<a href="../inicio">Volver al inicio</a>
+{% endblock %}
