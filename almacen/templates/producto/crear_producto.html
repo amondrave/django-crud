@@ -2,13 +2,28 @@
 {% extends 'index.html' %}
 {% block titulo %} {{titulo}} {% endblock %}
 {% block contenido %}
-<h2>Crear producto</h2>
-<p>Por favor llene los siguientes campos para el ingreso de los productos</p>
-<form action="" method="post">
-	{% csrf_token %}
-	{{ producto_form.as_p }}
-	<input type="submit" value="crear" />
-</form>
-<p>Para volver al menú principal presione <a href="../inicio">aquí</a></p>
-<p><a href="listar_producto">Productos existentes</a></p>
+<main class="container">
+	<h2>Crear producto</h2>
+	<p>Por favor llene los siguientes campos para el ingreso de los productos</p>
+	<form action="" method="post">
+		{% csrf_token %}
+		<div class="form-group" style="width: 50%;">
+			<label for="">{{producto_form.codigo.label}}</label>
+			{{producto_form.codigo}}
+		</div>
+		<div class="form-group" style="width: 50%" ;>
+			<label for="">{{producto_form.nombre.label}}</label>
+			{{producto_form.nombre}}
+		</div>
+		<div class="form-group" style="width: 50%;">
+			<label for="">{{producto_form.tipo.label}}</label>
+			{{producto_form.tipo}}
+		</div>
+		<div class=" text-center">
+			<input type="submit" value="crear" class="btn btn-primary" />
+		</div>
+	</form>
+	<p>Para volver al menú principal presione <a href="../inicio">aquí</a></p>
+	<p><a href="listar_producto">Productos existentes</a></p>
+</main>
 {% endblock %}

@@ -1,13 +1,26 @@
 from django.shortcuts import render, redirect
 from django.core.exceptions import ObjectDoesNotExist
+from django.views.generic import TemplateView, ListView
 from .forms import ProductoForm
 from .models import Producto
 
 # Create your views here.
 
+"""
+Vamos a migrar las vistas basadas en funciones por vistas basadas
+en clase para aprovechar al maximo lo que el framework nos ofrece
 
-def inicio(request):
-    return render(request, 'index.html', {'titulo': 'Bienvenidos'})
+"""
+
+# Vista basada en el template view para renderizar el template con el
+# contexto de la vista
+
+
+class InicioView(TemplateView):
+    template_name = 'index.html'
+
+    def get(self, request, *args, **kwargs):
+        return render(request, self.template_name, {'titulo': 'bienvenidos'})
 
 
 def crear_producto(request):
@@ -21,11 +34,17 @@ def crear_producto(request):
         producto_form = ProductoForm
         return render(request, 'producto/crear_producto.html', {'producto_form': producto_form, 'titulo': titulo})
 
+# Vista basa en ListView para mostrar informacion de la base de datos
+# en templates
 
-def listar_producto(request):
-    titulo = 'Productos'
-    productos = Producto.objects.all()
-    return render(request, 'producto/listar_producto.html', {'productos': productos, 'titulo': titulo})
+
+class ListarProductoView(ListView):
+    model = Producto  # Modelo de la base de datos
+    template_name = 'producto/listar_producto.html'
+    queryset = Producto.objects.all()  # Consulta que vamos a hacer
+    # Nombre del contexto que queremos dar
+    context_object_name = 'productos'
+
 
 # eliminación directa
 
