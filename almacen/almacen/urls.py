@@ -16,10 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from aplicaciones.producto.views import InicioView
+from aplicaciones.usuario.views import LoginView, cerrar_sesion
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('inicio', InicioView.as_view(), name='index'),
     path('producto/', include(('aplicaciones.producto.urls', 'producto'))),
+    path('', LoginView.as_view(), name='login'),
+    path('logout', cerrar_sesion, name='logout')
 ]

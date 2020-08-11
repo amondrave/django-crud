@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from django.core.exceptions import ObjectDoesNotExist
 from django.views.generic import TemplateView, ListView
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
 from .forms import ProductoForm
 from .models import Producto
 
@@ -16,6 +18,7 @@ en clase para aprovechar al maximo lo que el framework nos ofrece
 # contexto de la vista
 
 
+@method_decorator(login_required, name='dispatch')
 class InicioView(TemplateView):
     template_name = 'index.html'
 
@@ -23,6 +26,7 @@ class InicioView(TemplateView):
         return render(request, self.template_name, {'titulo': 'bienvenidos'})
 
 
+@login_required()
 def crear_producto(request):
     titulo = 'crear productos'
     if request.method == 'POST':
@@ -38,6 +42,7 @@ def crear_producto(request):
 # en templates
 
 
+@method_decorator(login_required, name='dispatch')
 class ListarProductoView(ListView):
     model = Producto  # Modelo de la base de datos
     template_name = 'producto/listar_producto.html'
@@ -48,13 +53,14 @@ class ListarProductoView(ListView):
 
 # eliminación directa
 
-
+@login_required()
 def eliminar_producto(request, codigo):
     producto = Producto.objects.get(codigo=codigo)
     producto.delete()
     return redirect('producto:listar_producto')
 
 
+@login_required()
 def editar_producto(request, codigo):
     producto_form = None
     error = None
