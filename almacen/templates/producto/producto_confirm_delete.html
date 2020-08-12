@@ -1,0 +1,15 @@
+{% extends 'index.html' %}
+
+{% block titulo %} confirmar eliminación {% endblock %}
+
+
+{% block contenido %}
+
+<form action="" method="post">
+    {% csrf_token %}
+    <span>¿Desea eliminar el registro {{ object }}?</span><br>
+    <input type="submit" value="confirmar" class="btn btn-danger">
+    <a href="../listar_producto" class="btn btn-primary">Cancelar</a>
+</form>
+
+{% endblock %}

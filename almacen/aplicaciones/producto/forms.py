@@ -9,6 +9,17 @@ class TipoProductoForm(fm.ModelForm):
     class Meta:
         model = TipoProducto
         fields = ['nombre']
+        labels = {
+            'nombre': 'Nombre del nuevo tipo'
+        }
+        widgets = {
+            'nombre': fm.TextInput(
+                attrs={
+                    'class': 'form-control',
+                    'placeholder': 'Nombre del tipo de producto'
+                }
+            )
+        }
 
 # Formlario del producto
 

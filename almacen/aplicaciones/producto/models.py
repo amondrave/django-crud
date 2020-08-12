@@ -11,7 +11,7 @@ class TipoProducto(models.Model):
         max_length=150, null=False, blank=False, unique=True)
 
     def __str__(self):
-        return "id: {} y su nombre: {}".format(self.id, self.nombre)
+        return "{}".format(self.nombre)
 
 
 # Modelo Producto
