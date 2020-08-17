@@ -1,0 +1,25 @@
+<!-- @format -->
+
+{% extends 'index.html' %}
+{% block titulo %} Crear usuario {% endblock %}
+{% block contenido %}
+
+<main class="container">
+	<h2>Crear usuario</h2>
+
+	<p>
+		Para poder ingresar al sistema cree un usuario si ya tiene el usuario creado por
+		favor devuevase al <a href="/">login</a>
+	</p>
+	<div class="row justify-content-center">
+		<div class="card-body">
+			<form method="post">
+				{% csrf_token %}
+				{{form.as_p}}
+				<input type="submit" value="Crear" class="btn btn-primary" />
+			</form>
+		</div>
+	</div>
+</main>
+
+{% endblock %}

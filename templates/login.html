@@ -1,24 +1,26 @@
+<!-- @format -->
+
 {% extends 'index.html' %}
-
 {% block titulo %} Inicio de sesión {% endblock %}
-
 {% block contenido %}
 
 <main class="container">
-
-    <form action="" method="POST">
-        {% csrf_token %}
-        <div class="form-group">
-            <label for="">Nombre de Usuario</label>
-            {{ form.username }}
-        </div>
-        <div class="form-group">
-            <label for="">Contraseña</label>
-            {{ form.password }}
-        </div>
-        <input type="submit" value="Inicio" class="btn btn-success">
-    </form>
-
+	<form action="" method="POST">
+		{% csrf_token %}
+		<div class="form-group">
+			<label for="">Nombre de Usuario</label>
+			{{ form.username }}
+		</div>
+		<div class="form-group">
+			<label for="">Contraseña</label>
+			{{ form.password }}
+		</div>
+		<input type="submit" value="Inicio" class="btn btn-success" />
+	</form>
+	<p>
+		Si usted no cuenta con un usuario lo puede crear en esta sección
+		<a href="registro">crear usuario</a>
+	</p>
 </main>
 
-{% endblock %}
+{% endblock contenido %}
