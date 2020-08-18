@@ -4,8 +4,8 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.views.generic import TemplateView, ListView, UpdateView, CreateView, DeleteView
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
-from .forms import ProductoForm
-from .models import Producto
+from .forms import ProductoForm, TipoProductoForm
+from .models import Producto, TipoProducto
 
 # Create your views here.
 
@@ -39,6 +39,7 @@ class CrearProductoView(CreateView):
                                                     'form': self.form_class})
 
 
+@method_decorator(login_required, name='dispatch')
 class EliminarProductoView(DeleteView):
     model = Producto
     success_url = reverse_lazy('producto:listar_producto')
@@ -74,3 +75,10 @@ class EditarProductoView(UpdateView):
     form_class = ProductoForm
     # Se define la accion que el va a realizar una vez haga el proceso
     success_url = reverse_lazy('producto:listar_producto')
+
+
+class CrearTipoView(CreateView):
+    tipo = TipoProducto
+    form_class = TipoProductoForm
+    template_name = 'producto/crear_tipo.html'
+    success_url = reverse_lazy('index')
